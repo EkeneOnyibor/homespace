@@ -1,0 +1,86 @@
+.order-details-container{
+    max-width:950px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.order-summary-card,
+.products-card,
+.delivery-card{
+    background:#fff;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:30px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.order-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.order-header h1{
+    color:#0b1f3a;
+}
+
+.status-badge{
+    background:#d4af37;
+    color:white;
+    padding:8px 18px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.order-meta p{
+    margin:8px 0;
+}
+
+.products-card h2,
+.delivery-card h2{
+    color:#0b1f3a;
+    margin-bottom:20px;
+}
+
+.order-product{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    padding:20px 0;
+    border-bottom:1px solid #eee;
+}
+
+.order-product:last-child{
+    border-bottom:none;
+}
+
+.product-image img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.no-image{
+    width:120px;
+    height:120px;
+    background:#eee;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+}
+
+.product-info h3{
+    color:#0b1f3a;
+    margin-bottom:10px;
+}
+
+.product-info p{
+    margin:8px 0;
+}
+
+.delivery-card p{
+    margin:10px 0;
+}

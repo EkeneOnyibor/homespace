@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="orders-container">
+
+    <h1 class="orders-title">My Orders</h1>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="order-header">
+                <h3>Order #{{ order.id }}</h3>
+
+                <span class="order-status">
+                    {{ order.status }}
+                </span>
+            </div>
+
+            <div class="order-info">
+                <p><strong>Date:</strong> {{ order.created_at }}</p>
+
+                <p><strong>Total:</strong> ₦{{ order.total }}</p>
+            </div>
+
+            <a class="view-order-btn"
+               href="{% url 'order_details' order.id %}">
+                View Order Details
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+    <div class="empty-orders">
+
+        <h2>No Orders Yet</h2>
+
+        <p>You haven't placed any orders.</p>
+
+        <a href="{% url 'home' %}" class="shop-btn">
+            Start Shopping
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+{% block content %}
+
+<div class="product-detail">
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="300">
+    {% else %}
+      <p>No Image Available</p>
+    {% endif %}
+    <h1>{{ product.name }}</h1>
+
+    <p><strong>Category:</strong> {{ product.category }}</p>
+
+    <p class="price"><strong>Price:</strong> ₦{{ product.price }}</p>
+
+    <p class="desc">{{ product.description }}</p>
+
+    <button class="btn-cart" id="add-to-cart-btn" onclick="handleAddToCart({{ product.id }})">
+        Add to Cart
+    </button>
+
+    <div class="quantity-controls" id="quantity-controls" style="display:none;">
+        <button class="qty-btn" onclick="changeQuantity({{ product.id }}, -1)">−</button>
+        <span id="quantity-display">1</span>
+        <button class="qty-btn" onclick="changeQuantity({{ product.id }}, 1)">+</button>
+    </div>
+</div>
+
+<!-- Pass product ID to JS cleanly -->
+<script>
+    window.PRODUCT_ID = {{ product.id }};
+</script>
+
+<script src="{% static 'js/product_detail.js' %}"></script>
+
+{% endblock %}

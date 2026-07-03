@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HomeSpace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order_details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order_success.css' %}">
+    <link rel="stylesheet" href="{% static 'css/smart_planner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h2>HomeSpace</h2>
+            <small>Empire Interior Limited</small>
+        </div>
+
+        
+
+
+        <ul class="nav-links" id="navLinks">
+            <li class="close-btn" onclick="toggleMenu()">
+                ✕
+            </li>
+
+            {% if user.is_authenticated %}
+
+            <li class="mobile-user">
+
+                <strong>
+                    👤 Welcome, {{ user.first_name|default:user.username }}
+                </strong>
+
+            </li>
+
+            <li>
+                <hr>
+            </li>
+
+            {% endif %}
+
+
+
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#featured-products">Shop</a></li>
+            <li><a href="#shop-by-room">Rooms</a></li>
+            <li><a href="{% url 'smart_planner' %}">Smart Planner</a></li>
+            <li><a href="#contact">Contact</a></li>
+            {% if user.is_authenticated %}
+
+            <li class="mobile-only">
+                <a href="{% url 'my_orders' %}">
+                    📦 My Orders
+                </a>
+            </li>
+
+            <li class="mobile-only">
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+            {% endif %}
+        </ul>
+
+        <div class="nav-actions">
+
+            <div class="user-panel">
+
+                {% if user.is_authenticated %}
+
+                <span class="welcome-user">
+                    Welcome, {{ user.first_name|default:user.username }}
+                </span>
+
+                <div class="user-links">
+
+                    <a href="{% url 'my_orders' %}">
+                        My Orders
+                    </a>
+
+                    <a href="{% url 'logout' %}">
+                        Logout
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                {% endif %}
+
+            </div>
+
+            <a href="{% url 'cart' %}" class="cart-btn">
+
+                🛒
+
+                <span id="cart-count" class="cart-count">
+
+                    {{ cart_count }}
+
+                </span>
+
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+            ☰
+        </div>
+
+        </div>
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+    <hr>
+
+    <footer id="contact">
+
+        <div class="footer-container">
+
+            <!-- Company -->
+            <div class="footer-section">
+
+                <h2>🏠 HomeSpace</h2>
+
+                <p class="footer-company">
+                    Empire Interior Limited
+                </p>
+
+                <p>
+                    Beautiful furniture and interior solutions
+                    for every modern home.
+                </p>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="footer-section">
+
+                <h3>Contact Us</h3>
+
+                <p>📞 +234 XXX XXX XXXX</p>
+
+                <p>📧 info@homespace.com</p>
+
+                <p>📍 Awka, Anambra State</p>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+
+                </div>
+
+            </div>
+
+            <!-- Hours -->
+
+            <div class="footer-section">
+
+                <h3>Business Hours</h3>
+
+                <p>Monday – Friday</p>
+
+                <p>8:00 AM – 6:00 PM</p>
+
+                <br>
+
+                <p>Saturday</p>
+
+                <p>9:00 AM – 4:00 PM</p>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="copyright">
+            © 2026 Empire Interior Limited. All Rights Reserved.
+        </p>
+
+    </footer>
+    <script src="{% static 'js/cart.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+
+</body>
+
+</html>

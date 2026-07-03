@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="planner-container">
+
+    <div class="planner-header">
+        <h1>🏡 Smart Interior Planner</h1>
+
+        <p>
+            Tell us about your room and we'll recommend furniture
+            that matches your style.
+        </p>
+    </div>
+
+    <form method="POST" class="planner-form">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label>Room Type</label>
+
+            <select name="room" required>
+
+                <option value="">Choose Room</option>
+
+                <option value="Living Room">Living Room</option>
+
+                <option value="Bedroom">Bedroom</option>
+
+                <option value="Kitchen">Kitchen</option>
+
+                <option value="Bathroom">Bathroom</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Preferred Style</label>
+
+            <select name="style" required>
+
+                <option value="">Choose Style</option>
+
+                <option value="Modern">Modern</option>
+
+                <option value="Luxury">Luxury</option>
+
+                <option value="Minimalist">Minimalist</option>
+
+                <option value="Classic">Classic</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Preferred Colour</label>
+
+            <select name="colour" required>
+
+                <option value="">Choose Colour</option>
+
+                <option value="White">White</option>
+
+                <option value="Black">Black</option>
+
+                <option value="Grey">Grey</option>
+
+                <option value="Brown">Brown</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Budget</label>
+
+            <select name="budget" required>
+
+                <option value="">Select Budget</option>
+
+                <option value="100-300">
+                    ₦100,000 - ₦300,000
+                </option>
+
+                <option value="300-700">
+                    ₦300,000 - ₦700,000
+                </option>
+
+                <option value="700+">
+                    ₦700,000+
+                </option>
+
+            </select>
+
+        </div>
+        <button type="submit" class="planner-btn">
+            ✨ Generate Recommendation
+        </button>
+
+    </form>
+
+    {% if recommended_products %}
+
+    <div class="recommendations">
+
+        <h2>Recommended Products</h2>
+
+        <div class="recommendation-grid">
+
+            {% for product in recommended_products %}
+
+            <div class="recommendation-card">
+
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% endif %}
+
+                <h3>{{ product.name }}</h3>
+
+                <p>₦{{ product.price }}</p>
+
+                <a href="{% url 'product_detail' product.id %}" class="view-btn">
+                    View Product
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% elif request.method == "POST" %}
+
+    <div class="no-results">
+
+        <h2>😔 No Matching Products</h2>
+
+        <p>
+            We couldn't find products matching your selected room,
+            style, colour and budget.
+        </p>
+
+        <p>
+            Try changing one or more options and generate another recommendation.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

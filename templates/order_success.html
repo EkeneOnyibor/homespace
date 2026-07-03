@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="success-container">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h1>Order Placed Successfully!</h1>
+
+        <p>
+            Thank you for shopping with <strong>HomeSpace</strong>.
+        </p>
+
+        <p>
+            Your order has been received and is being processed.
+        </p>
+
+        <div class="success-buttons">
+
+            <a href="{% url 'my_orders' %}" class="orders-btn">
+                View My Orders
+            </a>
+
+            <a href="{% url 'home' %}" class="home-btn">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

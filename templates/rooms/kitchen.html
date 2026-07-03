@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="room-page">
+    <h2 class="room-title">🍳 Kitchen Products</h2>
+
+    <div class="room-product-grid">
+        {% for product in products %}
+        <div class="room-product-card" data-product-id="{{ product.id }}">
+            <a href="{% url 'product_detail' product.id %}">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <div class="room-no-image">No Image</div>
+                {% endif %}
+                <div class="room-card-info">
+                    <h4>{{ product.name }}</h4>
+                    <p class="room-card-price">₦{{ product.price }}</p>
+                </div>
+            </a>
+
+            <button class="room-add-cart"
+                    id="add-btn-{{ product.id }}"
+                    onclick="addToCart({{ product.id }})">
+                Add to Cart
+            </button>
+
+            <div class="quantity-controls"
+                 id="qty-controls-{{ product.id }}"
+                 style="display:none;">
+                <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, -1)">−</button>
+                <span id="qty-display-{{ product.id }}">1</span>
+                <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, 1)">+</button>
+            </div>
+        </div>
+        {% empty %}
+        <p>No kitchen products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

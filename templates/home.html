@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="{% static 'video/hero.MP4' %}" type="video/MP4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+        <h1>Smart Interior Shopping for Modern Homes</h1>
+        <p>
+            Discover home interior products tailored to your space, budget, and lifestyle.
+            Powered by Empire Interior Limited.
+        </p>
+        <div class="hero-buttons">
+            <a href="#featured-products" class="btn primary">Shop Now</a>
+            <a href="{% url 'smart_planner' %}" class="btn secondary">Try Smart Planner</a>
+        </div>
+    </div>
+</section>
+
+<section class="featured-products" id="featured-products">
+    <h2>Featured Products</h2>
+    <div class="carousel-wrapper">
+        <div class="carousel-track" id="carouselTrack">
+            {% for product in featured_products %}
+            <a href="/product/{{ product.id }}/" class="carousel-card">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <div class="no-image">No Image</div>
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>₦{{ product.price }}</p>
+            </a>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <h2>What You Can Do on HomeSpace</h2>
+    <div class="feature-container">
+        <div class="feature-card">
+            <h3>🛒 Shop Products</h3>
+            <p>Browse home interior items like cookers, washers, and bathroom fittings.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🏠 Room Inspiration</h3>
+            <p>Discover products based on kitchen, bedroom, bathroom, and living room designs.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🧠 Smart Planner</h3>
+            <p>Get product recommendations based on your budget and room size.</p>
+        </div>
+    </div>
+</section>
+
+<section class="rooms" id="shop-by-room">
+    <h2>Shop by Room</h2>
+
+    <!-- Kitchen -->
+    <div class="room-section">
+        <div class="room-header">
+            <h3>🍳 Kitchen</h3>
+            <a href="/rooms/kitchen/" class="see-more">See More →</a>
+        </div>
+        <div class="room-products">
+            {% for product in kitchen_products %}
+            <div class="home-product-card" data-product-id="{{ product.id }}">
+                <a href="/product/{{ product.id }}/">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="no-image">No Image</div>
+                    {% endif %}
+                    <h4>{{ product.name }}</h4>
+                    <p class="price">₦{{ product.price }}</p>
+                </a>
+                <button class="btn-cart" id="add-btn-{{ product.id }}" onclick="addToCart({{ product.id }})">
+                    Add to Cart
+                </button>
+
+                <div class="quantity-controls" id="qty-controls-{{ product.id }}" style="display:none;">
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, -1)">
+                        −
+                    </button>
+
+                    <span id="qty-display-{{ product.id }}">1</span>
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, 1)">
+                        +
+                    </button>
+
+                </div>
+            </div>
+            {% empty %}
+            <p>No kitchen products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bathroom -->
+    <div class="room-section">
+        <div class="room-header">
+            <h3>🚿 Bathroom</h3>
+            <a href="/rooms/bathroom/" class="see-more">See More →</a>
+        </div>
+        <div class="room-products">
+            {% for product in bathroom_products %}
+            <div class="home-product-card" data-product-id="{{ product.id }}">
+                <a href="/product/{{ product.id }}/">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="no-image">No Image</div>
+                    {% endif %}
+                    <h4>{{ product.name }}</h4>
+                    <p class="price">₦{{ product.price }}</p>
+                </a>
+                <button class="btn-cart" id="add-btn-{{ product.id }}" onclick="addToCart({{ product.id }})">
+                    Add to Cart
+                </button>
+
+                <div class="quantity-controls" id="qty-controls-{{ product.id }}" style="display:none;">
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, -1)">
+                        −
+                    </button>
+
+                    <span id="qty-display-{{ product.id }}">1</span>
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, 1)">
+                        +
+                    </button>
+
+                </div>
+            </div>
+            {% empty %}
+            <p>No bathroom products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bedroom -->
+    <div class="room-section">
+        <div class="room-header">
+            <h3>🛏️ Bedroom</h3>
+            <a href="/rooms/bedroom/" class="see-more">See More →</a>
+        </div>
+        <div class="room-products">
+            {% for product in bedroom_products %}
+            <div class="home-product-card" data-product-id="{{ product.id }}">
+                <a href="/product/{{ product.id }}/">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="no-image">No Image</div>
+                    {% endif %}
+                    <h4>{{ product.name }}</h4>
+                    <p class="price">₦{{ product.price }}</p>
+                </a>
+                <button class="btn-cart" id="add-btn-{{ product.id }}" onclick="addToCart({{ product.id }})">
+                    Add to Cart
+                </button>
+
+                <div class="quantity-controls" id="qty-controls-{{ product.id }}" style="display:none;">
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, -1)">
+                        −
+                    </button>
+
+                    <span id="qty-display-{{ product.id }}">1</span>
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, 1)">
+                        +
+                    </button>
+
+                </div>
+            </div>
+            {% empty %}
+            <p>No bedroom products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Living Room -->
+    <div class="room-section">
+        <div class="room-header">
+            <h3>🛋️ Living Room</h3>
+            <a href="/rooms/living_room/" class="see-more">See More →</a>
+        </div>
+        <div class="room-products">
+            {% for product in living_room_products %}
+            <div class="home-product-card" data-product-id="{{ product.id }}">
+                <a href="/product/{{ product.id }}/">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="no-image">No Image</div>
+                    {% endif %}
+                    <h4>{{ product.name }}</h4>
+                    <p class="price">₦{{ product.price }}</p>
+                </a>
+                <button class="btn-cart" id="add-btn-{{ product.id }}" onclick="addToCart({{ product.id }})">
+                    Add to Cart
+                </button>
+
+                <div class="quantity-controls" id="qty-controls-{{ product.id }}" style="display:none;">
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, -1)">
+                        −
+                    </button>
+
+                    <span id="qty-display-{{ product.id }}">1</span>
+
+                    <button class="qty-btn" onclick="changeCardQuantity({{ product.id }}, 1)">
+                        +
+                    </button>
+
+                </div>
+            </div>
+            {% empty %}
+            <p>No living room products yet.</p>
+
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

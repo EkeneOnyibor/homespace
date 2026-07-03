@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="login-container">
+
+    <h1>Login</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="login_password">Password</label>
+        <div class="password-box">
+            <input type="password" id="login_password" name="password" required>
+
+            <span class="toggle-password" onclick="togglePassword('login_password', this)">👁</span>
+        </div>
+
+        <button type="submit" class="login-btn">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="{% url 'signup' %}">Create Account</a>
+    </p>
+
+</div>
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

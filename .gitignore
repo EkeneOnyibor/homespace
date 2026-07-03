@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# Database
+db.sqlite3
+
+# Static files generated during deployment
+staticfiles/
+
+# Media uploads
+media/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
