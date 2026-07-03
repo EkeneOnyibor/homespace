@@ -167,6 +167,12 @@ footer hr{
     margin-left:auto;
 }
 
+.nav-actions a{
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
 .user-panel{
     display:flex;
     flex-direction:column;
