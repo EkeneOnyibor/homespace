@@ -26,10 +26,9 @@
     <nav class="navbar">
         <div class="logo">
             <h2>HomeSpace</h2>
-            <small>Empire Interior Limited</small>
+            <img src="{{ MEDIA_URL }}site/logo3.png" alt="Empire Interiors" class="navbar-logo">
         </div>
 
-        
 
 
         <ul class="nav-links" id="navLinks">
@@ -72,6 +71,10 @@
                 <a href="{% url 'logout' %}">
                     🚪 Logout
                 </a>
+            </li>
+            {% else %}
+            <li class="mobile-only">
+                <a href="{% url 'login' %}">🔑 Login</a>
             </li>
 
             {% endif %}
@@ -121,8 +124,8 @@
 
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
-            ☰
-        </div>
+                ☰
+            </div>
 
         </div>
     </nav>
