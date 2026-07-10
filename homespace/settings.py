@@ -136,9 +136,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('l5f8l5wa'),
-    'API_KEY': os.getenv('118294172499535'),
-    'API_SECRET': os.getenv('ZTi94o9lpYsZJJcJMk5Yb0s2v_E'),
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
 STORAGES = {
